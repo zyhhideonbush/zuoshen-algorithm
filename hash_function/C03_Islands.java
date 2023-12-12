@@ -46,7 +46,7 @@ public class C03_Islands {
 		int count = 0;
 
 		for (int col = 0; col < arr.length; col++) {
-			for (int row = 0; row < arr[col].length; row++) {
+			for (int row=0; row < arr[col].length; row++) {
 				if (arr[col][row] == 1) {
 					infect(arr, row, col);
 					count++;

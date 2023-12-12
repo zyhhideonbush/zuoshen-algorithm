@@ -48,50 +48,49 @@ public class C05_KMP {
 	// }
 
 	public static int KMP(String s1, String s2) {
-		if (s1 == null || s2 == null || s2.length() < 1 || s1.length() < s2.length()) {
+		if (s1 == null || s2 == null || s1.length() < s2.length()) {
 			return -1;
 		}
+		char[] chars2 = s2.toCharArray();
+		char[] chars1 = s1.toCharArray();
 
-		char[] c1 = s1.toCharArray();
-		char[] c2 = s2.toCharArray();
-		int[] next = getNextArray(c2);
+		int[] nexts = getNextArray(chars2);
 
-		int i1 = 0, i2 = 0;
-		while (i1 < c1.length && i2 < c2.length) {
-			if (c1[i1] == c2[i2]) {
-				i1++;
-				i2++;
+		int index1 = 0;
+		int index2 = 0;
+
+		while (index1 < s1.length() && index2 < s2.length()) {
+			if (chars1[index1] == chars2[index2]) {
+				index1++;
+				index2++;
+			} else if (nexts[index2] != -1) {
+				index2 = nexts[index2];
 			} else {
-				if (i2 == 0) {
-					i1++;
-				} else {
-					i2 = next[i2];
-				}
+				index1++;
 			}
 		}
-		return i2 == c2.length ? i1 - i2 : -1;
+		return index2 == s2.length() ? index1 - index2 : -1;
 	}
 
-	private static int[] getNextArray(char[] list) {
-		int[] arr = new int[list.length];
-		arr[0] = -1;
-		arr[1] = 0;
-		for (int i = 2; i < arr.length; i++) {
-			if (list[i - 1] == list[arr[i - 1]]) {
-				arr[i] = arr[i - 1] + 1;
+	private static int[] getNextArray(char[] arr) {
+		int[] nexts = new int[arr.length];
+		nexts[0] = -1;
+		if (arr.length == 1) {
+			return nexts;
+		}
+		nexts[1] = 0;
+		int cn = 0;
+		int i = 2;
+		while (i < arr.length) {
+			if (arr[i - 1] == arr[cn]) {
+				nexts[i++] = ++cn;
+			} else if (cn > 0) {
+				cn = nexts[cn];
 			} else {
-				int j = arr[i - 1];
-				while (j != 0 && list[i - 1] != list[j]) {
-					j = arr[j];
-				}
-				if (list[i - 1] != list[j]) {
-					arr[i] = 0;
-				} else {
-					arr[i] = arr[j] + 1;
-				}
+				nexts[i++] = 0;
 			}
 		}
-		return arr;
+		return nexts;
 	}
 
 	public static void main(String[] args) {

@@ -52,30 +52,30 @@ public class C02_RandomPool {
 	// }
 
 	public static class Pool<T> {
-		private HashMap<Integer, T> indexMap = new HashMap<>();
 		private HashMap<T, Integer> valueMap = new HashMap<>();
+		private HashMap<Integer, T> indexMap = new HashMap<>();
 
-		public void insert(T key) {
-			if (!valueMap.containsKey(key)) {
-				indexMap.put(indexMap.size(), key);
-				valueMap.put(key, valueMap.size());
+		public void insert(T t) {
+			if (t != null && !valueMap.containsKey(t)) {
+				valueMap.put(t, valueMap.size());
+				indexMap.put(indexMap.size(), t);
 			}
 		}
 
-		public void delete(T key) {
-			if (!valueMap.containsKey(key)) {
+		public void del(T t) {
+			if (t == null || !valueMap.containsKey(t)) {
 				return;
 			}
-			int index = valueMap.get(key);
-			T element = indexMap.get(indexMap.size() - 1);
-			indexMap.put(index, element);
+			T t1 = indexMap.get(indexMap.size() - 1);
+			Integer index = valueMap.get(t);
+			indexMap.put(index, t1);
 			indexMap.remove(indexMap.size() - 1);
-			valueMap.put(element, index);
-			valueMap.remove(key);
+			valueMap.put(t1, index);
+			valueMap.remove(t);
 		}
 
 		public T getRandom() {
-			return indexMap.get((int) Math.random() * indexMap.size());
+			return indexMap.get((int)(Math.random() * indexMap.size()));
 		}
 	}
 
