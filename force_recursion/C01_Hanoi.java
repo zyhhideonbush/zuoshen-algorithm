@@ -24,7 +24,7 @@ public class C01_Hanoi {
 		if (n == 0) {
 			return;
 		}
-		process(n, "left", "right", "mid");
+		process(n, "left", "right", "mid");//
 	}
 
 	private static void process(int n, String from, String to, String other) {

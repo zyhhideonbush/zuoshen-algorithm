@@ -48,6 +48,7 @@ public class C06_Knapsack {
 	}
 
 	private static int process1(int[] weights, int[] values, int bag, int alreadyWeight, int index) {
+		//
 		if (alreadyWeight > bag) {
 			return 0;
 		}

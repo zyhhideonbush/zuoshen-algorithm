@@ -93,7 +93,7 @@ public class c10_NQueens {
 
 	private static boolean isValid(int[] record, int row, int col) {
 		for (int i = 0; i < row; i++) {
-			if (record[i] == col || Math.abs(record[i] - col) == Math.abs(i - row)) {
+			if (record[i] == col || Math.abs(row - i) == Math.abs(col - record[i])) {
 				return false;
 			}
 		}

@@ -41,7 +41,6 @@ public class C05_ConvertToLetterString {
 		}
 
 		return process(string.toCharArray(), 0);
-
 	}
 
 	private static int process(char[] arr, int i) {
@@ -52,17 +51,14 @@ public class C05_ConvertToLetterString {
 		if (arr[i] == '0') {
 			return 0;
 		} else if (arr[i] == '1') {
-			return process(arr, i + 1) + (i < arr.length -1 ? process(arr, i + 2) : 0);
-		} else if (arr[i] == '2') {
-			if (arr[i + 1] >= '0' && arr[i + 1] <= '6') {
-				return process(arr, i + 1) + (i < arr.length -1 ? process(arr, i + 2) : 0);
-			} else {
-				return process(arr, i + 1);
-			}
+			return process(arr, i + 1) + i < arr.length - 1 ? process(arr, i + 2) : 0;
+		} else if (arr[i] == '2' && arr[i + 1] >= '0' && arr[i + 1] <= '6') {
+			return process(arr, i + 1) + i < arr.length - 1 ? process(arr, i + 2) : 0;
 		} else {
 			return process(arr, i + 1);
 		}
 	}
+
 
 	public static void main(String[] args) {
 		System.out.println(number("11111"));

@@ -29,21 +29,21 @@ public class C04_ReverseStackUsingRecursive {
 		if (stack.isEmpty()) {
 			return;
 		}
-
-		int tem = getAndRemoveLastElement(stack);
+		Integer pop = getAndRemoveLastNode(stack);
 		reverse(stack);
-		stack.push(tem);
+		stack.push(pop);
 	}
 
-	private static int getAndRemoveLastElement(Stack<Integer> stack) {
-		if (stack.size() <= 1) {
+	private static Integer getAndRemoveLastNode(Stack<Integer> stack) {
+		if (stack.size() == 1) {
 			return stack.pop();
 		}
-		int tem1 = stack.pop();
-		int tem2 = getAndRemoveLastElement(stack);
-		stack.push(tem1);
-		return tem2;
+		Integer pop1 = stack.pop();
+		Integer pop2 = getAndRemoveLastNode(stack);
+		stack.push(pop1);
+		return pop2;
 	}
+
 
 	public static void main(String[] args) {
 		Stack<Integer> test = new Stack<Integer>();

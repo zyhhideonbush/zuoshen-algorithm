@@ -65,10 +65,9 @@ public class C09_MaxHappy {
 	}
 
 	public Info process(Employee emp) {
-		if (emp.subordinates.size() == 0) {
+		if (emp.subordinates == null || emp.subordinates.isEmpty()) {
 			return new Info(emp.happy, 0);
 		}
-
 		int comeMaxHappy = 0;
 		int notComeMaxHappy = 0;
 
@@ -77,7 +76,7 @@ public class C09_MaxHappy {
 			comeMaxHappy += info.notComeMaxHappy;
 			notComeMaxHappy += Math.max(info.comeMaxHappy, info.notComeMaxHappy);
 		}
-
+		
 		return new Info(comeMaxHappy, notComeMaxHappy);
 	}
 

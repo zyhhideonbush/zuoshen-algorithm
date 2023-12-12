@@ -16,12 +16,12 @@ public class C08_MaxDistanceInTree {
 	}
 
 	public static class ReturnType {
-		public int maxDistance;
-		public int h;
+		private Integer maxInstance;
+		private Integer height;
 
-		public ReturnType(int m, int h) {
-			this.maxDistance = m;
-			this.h = h;
+		public ReturnType(Integer maxInstance, Integer height) {
+			this.maxInstance = maxInstance;
+			this.height = height;
 		}
 	}
 
@@ -30,8 +30,7 @@ public class C08_MaxDistanceInTree {
 		if (head1 == null) {
 			return 0;
 		}
-
-		return process(head1).maxDistance;
+		return process(head1).maxInstance;
 	}
 
 	private static ReturnType process(Node head) {
@@ -41,12 +40,10 @@ public class C08_MaxDistanceInTree {
 		ReturnType left = process(head.left);
 		ReturnType right = process(head.right);
 
-		// 经过父节点
-		int maxDisOverFa = left.h + right.h + 1;
-		// 不经过父节点
-		int maxDisNotOverFa = Math.max(left.maxDistance, right.maxDistance);
+		int containsFather = left.height + right.height + 1;
+		int notContainsFather = Math.max(left.maxInstance, right.maxInstance);
 
-		return new ReturnType(Math.max(maxDisOverFa, maxDisNotOverFa), Math.max(left.h, right.h) + 1);
+		return new ReturnType(Math.max(containsFather, notContainsFather), Math.max(left.height, right.height) + 1);
 	}
 
 	// answer
